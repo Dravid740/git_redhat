@@ -1,0 +1,22 @@
+
+<project name="main" default="run">
+<target name="clean">
+<delete dir="dest"></delete>
+</target>
+<target name="create">
+<mkdir dir="dest/classes"></mkdir>
+</target>
+<target name="compile" depends="clean, create">
+<javac srcdir="src" destdir="dest/classes"></javac>
+</target>
+<target name="package" depends="compile">
+<jar basedir="dest/classes" destfile="dest/jar/hello.jar">
+<manifest>
+<attribute name="Main-Class" value="Hello2"/>
+</manifest>
+</jar>
+</target>
+<target name="run" depends="package">
+<java jar="dest/jar/hello.jar" fork="true"></java>
+</target>
+</project>
